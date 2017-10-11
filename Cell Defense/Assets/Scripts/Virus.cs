@@ -7,27 +7,35 @@ public class Virus : MonoBehaviour {
     public double  distX, distY, moduloDist, uniX, uniY;
     public Vector2 destiny;
     public int i = 0;
+    public int hp;
     public GameObject pathDefiner;
 
     // Use this for initialization
     void Start () {
+        hp = 3;
     }
 	
 	// Update is called once per frame
 	void Update () {
 
-        destiny = pathDefiner.GetComponent<PathDefiner>().pathway[i].transform.position;
+        if (i <= 26)
+        {
+            destiny = pathDefiner.GetComponent<PathDefiner>().pathway[i].transform.position;
 
-        distX = transform.position.x - destiny.x;
-        distY = transform.position.y - destiny.y;
+            distX = transform.position.x - destiny.x;
+            distY = transform.position.y - destiny.y;
 
-        moduloDist = Math.Sqrt(Math.Pow(distX, 2) + Math.Pow(distY, 2));
+            moduloDist = Math.Sqrt(Math.Pow(distX, 2) + Math.Pow(distY, 2));
 
-        uniX = -distX / moduloDist;
-        uniY = -distY / moduloDist;
+            uniX = -distX / moduloDist;
+            uniY = -distY / moduloDist;
 
-        GetComponent<Rigidbody2D>().velocity = new Vector2((float)uniX, (float)uniY);
-
+            GetComponent<Rigidbody2D>().velocity = new Vector2((float)uniX, (float)uniY);
+        }
+        else
+        {
+            GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
+        }
     }
 
     public void OnTriggerEnter2D(Collider2D collision)
@@ -36,6 +44,13 @@ public class Virus : MonoBehaviour {
         {
             i++;
         }
+        if (collision.gameObject.tag == "cell")
+        {
+            collision.gameObject.GetComponent<Cell>().hp--;
+            Destroy(gameObject);
+            collision.transform.localScale = new Vector3(collision.transform.localScale.x - 1, collision.transform.localScale.y - 1, collision.transform.localScale.z);
+        }
+
     }
 
 }

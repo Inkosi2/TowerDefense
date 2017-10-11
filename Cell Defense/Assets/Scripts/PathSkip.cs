@@ -11,6 +11,8 @@ public class PathSkip : MonoBehaviour
 
     Random rnd = new Random();
 
+    public float rand;
+
     // Use this for initialization
     void Start()
     {
@@ -20,18 +22,16 @@ public class PathSkip : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        rand = Random.Range(0.0f, 1.0f);
     }
 
-    public void OnTriggerEnter(Collider other)
+    public void OnTriggerEnter2D(Collider2D other)
     {
-        other.gameObject.GetComponent<SpriteRenderer>().color = Color.red;
-
         if (other.gameObject.tag == "virus")
         {
             if (bridge.GetComponent<Bridge>().isEmpty) //el puente está vacío
             {
-                if (Random.Range(0, 1) == 0)
+                if (rand >= 0.5f)
                 {
                     other.gameObject.GetComponent<Virus>().i = indexNode2;
                 }
