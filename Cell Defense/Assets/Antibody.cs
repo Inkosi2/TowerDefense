@@ -34,11 +34,9 @@ public class Antibody : MonoBehaviour {
         if (collision.tag == "virus")
         {
             collision.gameObject.GetComponent<Virus>().hp--;
-            turret.GetComponent<Turret>().antibodies--;
+            turret.GetComponent<Turret>().isDead = true;
             turret.GetComponent<Turret>().time = 0;
-            Destroy(gameObject);
+            Destroy(turret.GetComponent<Turret>().antibody);
         }
     }
-
-
 }
