@@ -33,7 +33,7 @@ public class Turret : MonoBehaviour {
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.tag == "virus")
+        if (collision.tag == "virus" && ab1 != null)
         {
             ab1.GetComponent<Antibody>().destination = collision.transform.position;
         }

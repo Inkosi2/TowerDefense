@@ -23,7 +23,8 @@ public class Antibody : MonoBehaviour {
         uniX = -distX / moduloDist;
         uniY = -distY / moduloDist;
 
-        GetComponent<Rigidbody2D>().velocity = new Vector2((float)1.5 * (float)uniX, (float)1.5* (float)uniY);
+        if (uniX >= 0 && uniY >= 0)
+            GetComponent<Rigidbody2D>().velocity = new Vector2((float)1.5 * (float)uniX, (float)1.5 * (float)uniY);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
