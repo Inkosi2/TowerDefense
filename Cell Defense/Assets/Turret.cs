@@ -8,18 +8,26 @@ public class Turret : MonoBehaviour {
     public int antibodies = 0;
     public GameObject antibody;
     public GameObject ab1, ab2, ab3;
-
+    public float time;
+    double[] AntiPositionsX = new double[3] { -1.9, -2, -1.8 };
+    double[] AntiPositionsY = new double[3] { 0.2, -0.8, -0.5 };
+    GameObject[] AB = new GameObject[] {};
     // Use this for initialization
-	void Start () {
-	
+    void Start () {
+        time = 3;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-	    if (antibodies < 1)
+
+        time += Time.deltaTime;
+
+	    if (antibodies < 3 && time >= 3)
         {
             ab1 = Instantiate(antibody);
             antibodies++;
+            time = 0;
+
         }
 	}
 
