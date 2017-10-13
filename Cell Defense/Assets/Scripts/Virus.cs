@@ -6,13 +6,14 @@ using System;
 public class Virus : MonoBehaviour {
     public double  distX, distY, moduloDist, uniX, uniY;
     public Vector2 destiny;
-    public int i = 0;
+    public int i;
     public int hp;
     public GameObject pathDefiner;
 
     // Use this for initialization
     void Start () {
         hp = 3;
+        i = 0;
     }
 	
 	// Update is called once per frame
@@ -30,12 +31,18 @@ public class Virus : MonoBehaviour {
             uniX = -distX / moduloDist;
             uniY = -distY / moduloDist;
 
-            GetComponent<Rigidbody2D>().velocity = new Vector2((float)uniX, (float)uniY);
+            GetComponent<Rigidbody2D>().velocity = new Vector2((float)uniX * 3, (float)uniY * 3);
         }
         else
         {
             GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
         }
+
+        if (hp == 0)
+        {
+            Destroy(gameObject);
+        }
+
     }
 
     public void OnTriggerEnter2D(Collider2D collision)
