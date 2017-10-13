@@ -8,6 +8,8 @@ public class Antibody : MonoBehaviour {
 
     public Vector2 destination;
 
+    public GameObject turret;
+
 	// Use this for initialization
 	void Start () {
         destination = transform.position;
@@ -32,6 +34,8 @@ public class Antibody : MonoBehaviour {
         if (collision.tag == "virus")
         {
             collision.gameObject.GetComponent<Virus>().hp--;
+            turret.GetComponent<Turret>().antibodies--;
+            turret.GetComponent<Turret>().time = 0;
             Destroy(gameObject);
         }
     }
